@@ -12,7 +12,7 @@
                     <v-row justify="center">
                         <v-col cols="12" sm="8" md="6">
                             <!-- Form starts -->
-                            <v-form @submit.prevent="login" ref="form" lazy-validation>
+                            <v-form @submit.prevent="adminLogin" ref="form" lazy-validation>
                                 <!-- Email -->
                                 <v-text-field variant="outlined" v-model="email" label="Email" :rules="emailRules" required
                                     style="color: black;"></v-text-field>
@@ -62,6 +62,8 @@
 
 <script>
 import AuthImageComponent from "../../components/authPageImage/AuthImageComponent"
+import axios from "axios";
+import store from "../../store"
 
 export default {
     name: "AdminLoginView",
@@ -85,7 +87,27 @@ export default {
         };
     },
     methods: {
+        async adminLogin() {
+            if (this.$refs.form.validate()) {
+                // save admin login form data
+                const adminLoginCredentials = {
+                    email: this.email,
+                    password: this.password
+                }
+                // console.log
+                console.log(adminLoginCredentials);
+                try {
+                    // Make an Axios POST request to the login endpoint
+                    const response = axios.post('http://127.0.0.1:8000/api/admin/login', adminLoginCredentials, )
+                    console.log(response)
+                } catch (error) {
+                    // Handle login error here
+                    console.error('Login failed:', error);
+                    this.loginError = true; // Set the error flag to display the error message
+                }
 
+            }
+        }
     },
 }
 </script>
