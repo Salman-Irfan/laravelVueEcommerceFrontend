@@ -5,6 +5,7 @@ import HomeView from "../views/HomeView.vue"
 // not found
 import NotFoundView from "../views/notFound/NotFoundView.vue"
 // auth
+import AdminLoginView from "../views/auth/AdminLoginView.vue"
 import LoginView from "../views/auth/LoginView.vue"
 import RequestPasswordView from "../views/auth/RequestPasswordView.vue"
 import ResetPasswordView from "../views/auth/ResetPasswordView.vue"
@@ -46,12 +47,21 @@ const routes = [
     name: "HomeView",
     component: HomeView
   },
-  
+
   // login - guest
   {
     path: '/login',
     name: "LoginView",
     component: LoginView,
+    meta: {
+      requiresGuest: true
+    },
+  },
+  // login - admin - guest
+  {
+    path: '/admin/login',
+    name: "AdminLoginView",
+    component: AdminLoginView,
     meta: {
       requiresGuest: true
     },
@@ -91,11 +101,11 @@ const router = createRouter({
 // router beforeEach method
 router.beforeEach((to, from, next) => {
   // if page requires auth, and token doesn't exists
-  if(to.meta.requiresAuth && !store.state.user.token){
-    next({ name: 'LoginView'})
-  }else if (to.meta.requiresGuest && store.state.user.token){
-    next({ name: 'app.dashboard'})
-  }else {
+  if (to.meta.requiresAuth && !store.state.user.token) {
+    next({ name: 'LoginView' })
+  } else if (to.meta.requiresGuest && store.state.user.token) {
+    next({ name: 'app.dashboard' })
+  } else {
     next()
   }
 })

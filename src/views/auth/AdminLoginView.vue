@@ -5,9 +5,9 @@
             <AuthImageComponent />
             <!-- Right Half - Form -->
             <v-col cols="6" class="mt-4">
-                <v-container fluid style="background-color: black;" class="mt-8">
+                <v-container fluid style="background-color: orangered;" class="mt-8">
                     <!-- login form heading -->
-                    <h1 class="text-center" style="color: yellow;">Login Form</h1>
+                    <h1 class="text-center" style="color: black;">Admin Login Form</h1>
                     <!-- center align the form inputs -->
                     <v-row justify="center">
                         <v-col cols="12" sm="8" md="6">
@@ -15,15 +15,15 @@
                             <v-form @submit.prevent="login" ref="form" lazy-validation>
                                 <!-- Email -->
                                 <v-text-field variant="outlined" v-model="email" label="Email" :rules="emailRules" required
-                                    style="color: yellow;"></v-text-field>
+                                    style="color: black;"></v-text-field>
                                 <!-- Password -->
                                 <v-text-field variant="outlined" v-model="password"
                                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                                     :type="showPassword ? 'text' : 'password'" @click:append="showPassword = !showPassword"
                                     :append-icon-cb="() => showPassword = !showPassword" label="Password"
-                                    :rules="passwordRules" required style="color: yellow;"></v-text-field>
+                                    :rules="passwordRules" required style="color: black;"></v-text-field>
                                 <!-- Submit button -->
-                                <v-btn type="submit" block class="mt-4" style="background-color: yellow; color: black;">
+                                <v-btn type="submit" block class="mt-4" style="background-color: orange; color: black;">
                                     Login
                                 </v-btn>
                                 <!-- Error message for invalid input -->
@@ -34,9 +34,9 @@
                             <!-- Registration and Forgot Password Links -->
                             <v-row>
                                 <v-col cols="12">
-                                    <div class="text-center" style="color: yellow;">
-                                        <!-- admin login -->
-                                        <p>Login as <router-link to="/admin/login"> Admin User </router-link>
+                                    <div class="text-center" style="color: black;">
+                                        <!-- normal user login -->
+                                        <p>Login as <router-link to="/login"> User </router-link>
                                         </p>
                                         <!-- register -->
                                         <p>
@@ -45,7 +45,7 @@
                                     </div>
                                 </v-col>
                                 <v-col cols="12">
-                                    <div class="text-center" style="color: yellow;">
+                                    <div class="text-center" style="color: black;">
                                         <!-- forgot password -->
                                         <router-link to="/request-password">Forgot Password</router-link>
                                     </div>
@@ -64,7 +64,7 @@
 import AuthImageComponent from "../../components/authPageImage/AuthImageComponent"
 
 export default {
-    name: "LoginView",
+    name: "AdminLoginView",
     components: {
         AuthImageComponent
     },
