@@ -5,6 +5,7 @@ import HomeView from "../views/HomeView.vue"
 // not found
 import NotFoundView from "../views/notFound/NotFoundView.vue"
 // auth
+import RegisterView from "../views/auth/RegisterView.vue"
 import AdminLoginView from "../views/auth/AdminLoginView.vue"
 import LoginView from "../views/auth/LoginView.vue"
 import RequestPasswordView from "../views/auth/RequestPasswordView.vue"
@@ -47,7 +48,15 @@ const routes = [
     name: "HomeView",
     component: HomeView
   },
-
+  // register - guest
+  {
+    path: '/register',
+    name: "RegisterView",
+    component: RegisterView,
+    meta: {
+      requiresGuest: true
+    },
+  },
   // login - guest
   {
     path: '/login',
