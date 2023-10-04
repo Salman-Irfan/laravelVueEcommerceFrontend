@@ -91,20 +91,28 @@ export default {
                     email: this.email,
                     password: this.password
                 }
-                // console.log
-                console.log(adminLoginCredentials);
-                try {
-                    const response = await axios.post('http://127.0.0.1:8000/api/admin/login', adminLoginCredentials,)
-                    console.log(response)
-                    // if api sends token
-                    if (response.data.token) {
-                        console.log("admin user logged in")
-                    }
-                } catch (error) {
-                    // Handle login error here
-                    console.error('Login failed:', error);
-                    this.loginError = true; // Set the error flag to display the error message
-                }
+
+                // with store
+                store.dispatch('adminLogin', adminLoginCredentials)
+                    .then(()=>{
+                        this.$router.push('/app/dashboard')
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                    });
+
+                // try {
+                //     const response = await axios.post('http://127.0.0.1:8000/api/admin/login', adminLoginCredentials,)
+                //     console.log(response)
+                //     // if api sends token
+                //     if (response.data.token) {
+                //         this.$router.push('/app/dashboard')
+                //     }
+                // } catch (error) {
+                //     // Handle login error here
+                //     console.error('Login failed:', error);
+                //     this.loginError = true; // Set the error flag to display the error message
+                // }
             }
         }
     },
