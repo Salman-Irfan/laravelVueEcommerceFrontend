@@ -21,7 +21,8 @@
                                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                                     :type="showPassword ? 'text' : 'password'" @click:append="showPassword = !showPassword"
                                     :append-icon-cb="() => showPassword = !showPassword" label="Password"
-                                    :rules="passwordRules" required style="color: black;"></v-text-field>
+                                    required 
+                                    style="color: black;"></v-text-field>
                                 <!-- Submit button -->
                                 <v-btn type="submit" block class="mt-4" style="background-color: orange; color: black;">
                                     Login
@@ -79,10 +80,6 @@ export default {
                 (v) => !!v || "Email is required",
                 (v) => /.+@.+\..+/.test(v) || "Valid email is required",
             ],
-            passwordRules: [
-                (v) => !!v || "Password is required",
-                (v) => (v && v.length >= 8) || "Password must be at least 8 characters",
-            ],
             loginError: false, // Flag to show signup error message
         };
     },
@@ -96,18 +93,13 @@ export default {
                 }
                 // console.log
                 console.log(adminLoginCredentials);
-                // let xsrf = await axios.get('http://localhost:8000/sanctum/csrf-cookie');
-                // console.log(xsrf);
                 try {
-                    // let header = {"xsrf-token": xsrf }
-                    // Make an Axios POST request to the login endpoint
-                    const response = await axios.post('http://127.0.0.1:8000/api/admin/login',  adminLoginCredentials, 
-                    // {
-                    //     header: header,
-                    // }
-                    )
-                    console.log(response)// promise error
-                    console.log("user logged in")
+                    const response = await axios.post('http://127.0.0.1:8000/api/admin/login', adminLoginCredentials,)
+                    console.log(response)
+                    // if api sends token
+                    if (response.data.token) {
+                        console.log("admin user logged in")
+                    }
                 } catch (error) {
                     // Handle login error here
                     console.error('Login failed:', error);
