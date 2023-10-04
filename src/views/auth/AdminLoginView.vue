@@ -96,16 +96,23 @@ export default {
                 }
                 // console.log
                 console.log(adminLoginCredentials);
+                // let xsrf = await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+                // console.log(xsrf);
                 try {
+                    // let header = {"xsrf-token": xsrf }
                     // Make an Axios POST request to the login endpoint
-                    const response = axios.post('http://127.0.0.1:8000/api/admin/login', adminLoginCredentials, )
-                    console.log(response)
+                    const response = await axios.post('http://127.0.0.1:8000/api/admin/login',  adminLoginCredentials, 
+                    // {
+                    //     header: header,
+                    // }
+                    )
+                    console.log(response)// promise error
+                    console.log("user logged in")
                 } catch (error) {
                     // Handle login error here
                     console.error('Login failed:', error);
                     this.loginError = true; // Set the error flag to display the error message
                 }
-
             }
         }
     },

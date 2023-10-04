@@ -61,6 +61,7 @@
 
 
 <script>
+import axios from "axios";
 import AuthImageComponent from "../../components/authPageImage/AuthImageComponent"
 
 export default {
@@ -85,7 +86,38 @@ export default {
         };
     },
     methods: {
+        login() {
+            // Create a request body object with email and password
+            const requestBody = {
+                email: this.email,
+                password: this.password,
+            };
 
+            // Send a POST request to the server
+            axios.post("http://127.0.0.1:8000/api/login", requestBody)
+                .then((response) => {
+                    // Handle the successful response here
+                    if (response.data.success) {
+                        // Store the token in localStorage or Vuex store as needed
+                        const token = response.data.token;
+                        console.log(token);
+                        // You can also redirect to another page after successful login
+                        // For example, if you're using Vue Router:
+                        // this.$router.push("/dashboard");
+                    } else {
+                        // Handle the case where the login is unsuccessful
+                        this.loginError = true;
+                        // You can display an error message here
+                    }
+                })
+                .catch((error) => {
+                    // Handle any errors that occur during the request
+                    console.error("Login error:", error);
+                    this.loginError = true;
+                    // You can display an error message here
+                });
+        },
     },
+
 }
 </script>
